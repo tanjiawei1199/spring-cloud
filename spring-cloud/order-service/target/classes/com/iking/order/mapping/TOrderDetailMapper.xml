@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iking.order.dao.TOrderDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.iking.module.oder.model.TOrderDetail" >
+    <id column="f_id" property="fId" jdbcType="VARCHAR" />
+    <result column="f_order_id" property="fOrderId" jdbcType="VARCHAR" />
+    <result column="f_goods_id" property="fGoodsId" jdbcType="VARCHAR" />
+    <result column="f_buy_count" property="fBuyCount" jdbcType="INTEGER" />
+    <result column="f_buy_price" property="fBuyPrice" jdbcType="DOUBLE" />
+    <result column="f_sum_price" property="fSumPrice" jdbcType="DOUBLE" />
+    <result column="f_create_time" property="fCreateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_order_id, f_goods_id, f_buy_count, f_buy_price, f_sum_price, f_create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order_detail
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_order_detail
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.iking.module.oder.model.TOrderDetail" >
+    insert into t_order_detail (f_id, f_order_id, f_goods_id, 
+      f_buy_count, f_buy_price, f_sum_price, 
+      f_create_time)
+    values (#{fId,jdbcType=VARCHAR}, #{fOrderId,jdbcType=VARCHAR}, #{fGoodsId,jdbcType=VARCHAR}, 
+      #{fBuyCount,jdbcType=INTEGER}, #{fBuyPrice,jdbcType=DOUBLE}, #{fSumPrice,jdbcType=DOUBLE}, 
+      #{fCreateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iking.module.oder.model.TOrderDetail" >
+    insert into t_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        f_id,
+      </if>
+      <if test="fOrderId != null" >
+        f_order_id,
+      </if>
+      <if test="fGoodsId != null" >
+        f_goods_id,
+      </if>
+      <if test="fBuyCount != null" >
+        f_buy_count,
+      </if>
+      <if test="fBuyPrice != null" >
+        f_buy_price,
+      </if>
+      <if test="fSumPrice != null" >
+        f_sum_price,
+      </if>
+      <if test="fCreateTime != null" >
+        f_create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrderId != null" >
+        #{fOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="fGoodsId != null" >
+        #{fGoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="fBuyCount != null" >
+        #{fBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="fBuyPrice != null" >
+        #{fBuyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="fSumPrice != null" >
+        #{fSumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="fCreateTime != null" >
+        #{fCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iking.module.oder.model.TOrderDetail" >
+    update t_order_detail
+    <set >
+      <if test="fOrderId != null" >
+        f_order_id = #{fOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="fGoodsId != null" >
+        f_goods_id = #{fGoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="fBuyCount != null" >
+        f_buy_count = #{fBuyCount,jdbcType=INTEGER},
+      </if>
+      <if test="fBuyPrice != null" >
+        f_buy_price = #{fBuyPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="fSumPrice != null" >
+        f_sum_price = #{fSumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="fCreateTime != null" >
+        f_create_time = #{fCreateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iking.module.oder.model.TOrderDetail" >
+    update t_order_detail
+    set f_order_id = #{fOrderId,jdbcType=VARCHAR},
+      f_goods_id = #{fGoodsId,jdbcType=VARCHAR},
+      f_buy_count = #{fBuyCount,jdbcType=INTEGER},
+      f_buy_price = #{fBuyPrice,jdbcType=DOUBLE},
+      f_sum_price = #{fSumPrice,jdbcType=DOUBLE},
+      f_create_time = #{fCreateTime,jdbcType=TIMESTAMP}
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </update>
+</mapper>

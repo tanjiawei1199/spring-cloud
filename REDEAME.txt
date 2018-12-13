@@ -1,0 +1,17 @@
+
+启动/lcn/eureka文件夹下的start.bat
+启动/tx-manager-4.1.0中的start.bat
+启动redis-2.6-x64下的start service.bat
+
+导入项目spring-cloud 和zipkin-server 到开发工具中
+把spring-cloud中的db下的sql文件执行到mysql数据库中。
+
+启动zipkin-server 成功后访问http://localhost:9411
+
+启动user-service、order-service、api-gateway
+
+启动成功访问swagger  http://localhost:8013/swagger-ui.html#/
+
+即可测试接口是否能正常运行
+
+如有疑问，请@笔者QQ:285763097

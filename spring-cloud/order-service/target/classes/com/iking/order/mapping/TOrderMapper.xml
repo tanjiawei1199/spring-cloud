@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iking.order.dao.TOrderMapper" >
+  <resultMap id="BaseResultMap" type="com.iking.module.oder.model.TOrder" >
+    <id column="f_id" property="fId" jdbcType="VARCHAR" />
+    <result column="f_order_user_id" property="fOrderUserId" jdbcType="VARCHAR" />
+    <result column="f_concat_user" property="fConcatUser" jdbcType="VARCHAR" />
+    <result column="f_phone" property="fPhone" jdbcType="TIMESTAMP" />
+    <result column="f_address" property="fAddress" jdbcType="VARCHAR" />
+    <result column="f_create_time" property="fCreateTime" jdbcType="VARCHAR" />
+    <result column="f_sum_price" property="fSumPrice" jdbcType="DOUBLE" />
+    <result column="f_is_delete" property="fIsDelete" jdbcType="BIT" />
+    <result column="f_state" property="fState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_order_user_id, f_concat_user, f_phone, f_address, f_create_time, f_sum_price, 
+    f_is_delete, f_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_order
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.iking.module.oder.model.TOrder" >
+    insert into t_order (f_id, f_order_user_id, f_concat_user, 
+      f_phone, f_address, f_create_time, 
+      f_sum_price, f_is_delete, f_state
+      )
+    values (#{fId,jdbcType=VARCHAR}, #{fOrderUserId,jdbcType=VARCHAR}, #{fConcatUser,jdbcType=VARCHAR}, 
+      #{fPhone,jdbcType=TIMESTAMP}, #{fAddress,jdbcType=VARCHAR}, #{fCreateTime,jdbcType=VARCHAR}, 
+      #{fSumPrice,jdbcType=DOUBLE}, #{fIsDelete,jdbcType=BIT}, #{fState,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.iking.module.oder.model.TOrder" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        f_id,
+      </if>
+      <if test="fOrderUserId != null" >
+        f_order_user_id,
+      </if>
+      <if test="fConcatUser != null" >
+        f_concat_user,
+      </if>
+      <if test="fPhone != null" >
+        f_phone,
+      </if>
+      <if test="fAddress != null" >
+        f_address,
+      </if>
+      <if test="fCreateTime != null" >
+        f_create_time,
+      </if>
+      <if test="fSumPrice != null" >
+        f_sum_price,
+      </if>
+      <if test="fIsDelete != null" >
+        f_is_delete,
+      </if>
+      <if test="fState != null" >
+        f_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fOrderUserId != null" >
+        #{fOrderUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="fConcatUser != null" >
+        #{fConcatUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhone != null" >
+        #{fPhone,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fAddress != null" >
+        #{fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreateTime != null" >
+        #{fCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fSumPrice != null" >
+        #{fSumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="fIsDelete != null" >
+        #{fIsDelete,jdbcType=BIT},
+      </if>
+      <if test="fState != null" >
+        #{fState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iking.module.oder.model.TOrder" >
+    update t_order
+    <set >
+      <if test="fOrderUserId != null" >
+        f_order_user_id = #{fOrderUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="fConcatUser != null" >
+        f_concat_user = #{fConcatUser,jdbcType=VARCHAR},
+      </if>
+      <if test="fPhone != null" >
+        f_phone = #{fPhone,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fAddress != null" >
+        f_address = #{fAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fCreateTime != null" >
+        f_create_time = #{fCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="fSumPrice != null" >
+        f_sum_price = #{fSumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="fIsDelete != null" >
+        f_is_delete = #{fIsDelete,jdbcType=BIT},
+      </if>
+      <if test="fState != null" >
+        f_state = #{fState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iking.module.oder.model.TOrder" >
+    update t_order
+    set f_order_user_id = #{fOrderUserId,jdbcType=VARCHAR},
+      f_concat_user = #{fConcatUser,jdbcType=VARCHAR},
+      f_phone = #{fPhone,jdbcType=TIMESTAMP},
+      f_address = #{fAddress,jdbcType=VARCHAR},
+      f_create_time = #{fCreateTime,jdbcType=VARCHAR},
+      f_sum_price = #{fSumPrice,jdbcType=DOUBLE},
+      f_is_delete = #{fIsDelete,jdbcType=BIT},
+      f_state = #{fState,jdbcType=INTEGER}
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </update>
+</mapper>

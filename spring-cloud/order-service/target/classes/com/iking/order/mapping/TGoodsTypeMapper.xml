@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iking.order.dao.TGoodsTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.iking.module.oder.model.TGoodsType" >
+    <id column="f_id" property="fId" jdbcType="VARCHAR" />
+    <result column="f_type_name" property="fTypeName" jdbcType="VARCHAR" />
+    <result column="f_parent_id" property="fParentId" jdbcType="VARCHAR" />
+    <result column="f_is_delete" property="fIsDelete" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    f_id, f_type_name, f_parent_id, f_is_delete
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_goods_type
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_goods_type
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.iking.module.oder.model.TGoodsType" >
+    insert into t_goods_type (f_id, f_type_name, f_parent_id, 
+      f_is_delete)
+    values (#{fId,jdbcType=VARCHAR}, #{fTypeName,jdbcType=VARCHAR}, #{fParentId,jdbcType=VARCHAR}, 
+      #{fIsDelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.iking.module.oder.model.TGoodsType" >
+    insert into t_goods_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        f_id,
+      </if>
+      <if test="fTypeName != null" >
+        f_type_name,
+      </if>
+      <if test="fParentId != null" >
+        f_parent_id,
+      </if>
+      <if test="fIsDelete != null" >
+        f_is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fId != null" >
+        #{fId,jdbcType=VARCHAR},
+      </if>
+      <if test="fTypeName != null" >
+        #{fTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="fParentId != null" >
+        #{fParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="fIsDelete != null" >
+        #{fIsDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.iking.module.oder.model.TGoodsType" >
+    update t_goods_type
+    <set >
+      <if test="fTypeName != null" >
+        f_type_name = #{fTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="fParentId != null" >
+        f_parent_id = #{fParentId,jdbcType=VARCHAR},
+      </if>
+      <if test="fIsDelete != null" >
+        f_is_delete = #{fIsDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.iking.module.oder.model.TGoodsType" >
+    update t_goods_type
+    set f_type_name = #{fTypeName,jdbcType=VARCHAR},
+      f_parent_id = #{fParentId,jdbcType=VARCHAR},
+      f_is_delete = #{fIsDelete,jdbcType=BIT}
+    where f_id = #{fId,jdbcType=VARCHAR}
+  </update>
+</mapper>
