@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @TxTransaction(isStart = true)
     @Transactional(rollbackFor = Exception.class)
-    @HystrixCommand(fallbackMethod = "insertFallback")
+//    @HystrixCommand(fallbackMethod = "insertFallback")
     public Msg insert(HttpOrderSaveReq req){
         req.setfId(SysUtil.getUUID());
         // 查询下单人id是否存在
@@ -86,7 +86,7 @@ public class OrderServiceImpl implements OrderService {
         detail.setfGoodsId(req.getfGoodsId());
         // 新增订单详情
         orderDetailMapper.insert(detail);
-        //        int a = 9/0;
+        int a = 9/0;
         // 新增订单
         req.setfSumPrice(detail.getfSumPrice());
         orderMapper.insert(req);

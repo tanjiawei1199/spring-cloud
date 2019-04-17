@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -50,32 +49,18 @@ public class TUserServiceImpl implements TUserService {
     @TxTransaction
     public Msg insert(HttpInsertUserReq tUser) throws NoSuchAlgorithmException {
         Msg msg = new Msg();
-        try {
             // 账号名重复验证
-            if (tUserMapper.selectByLoginName(tUser.getfAccount()) != null) {
-                msg.setSuccess(false);
-                msg.setMsg("账号已存在!");
-                return msg;
-            }
-
-            // 新增账号信息
-            tUser.setfPassword(SysUtil.getMD5(tUser.getfPassword()));
-            tUser.setfId(SysUtil.getUUID());
-            tUser.setfState(1);
-            if (tUserMapper.insertSelective(tUser) < 1) {
-                msg.setSuccess(false);
-                TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-                msg.setMsg("新增账号信息失败!");
-                return msg;
-            }
-        } catch (Exception e) {
+        if (tUserMapper.selectByLoginName(tUser.getfAccount()) != null) {
             msg.setSuccess(false);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            msg.setMsg("新增账号信息异常!");
-            log.error("新增账号信息异常: 新增信息=" + tUser.toString() + "异常信息:" + e);
+            msg.setMsg("账号已存在!");
             return msg;
         }
-        return msg;
+        // 新增账号信息
+        tUser.setfPassword(SysUtil.getMD5(tUser.getfPassword()));
+        tUser.setfId(SysUtil.getUUID());
+        tUser.setfState(1);
+        tUserMapper.insertSelective(tUser);
+        return Msg.sucess();
     }
 
 

@@ -3,8 +3,8 @@ package com.iking.userservice.controller;
 
 import com.iking.module.model.Msg;
 import com.iking.module.user.model.TUser;
-import com.iking.module.user.model.http.*;
-import com.iking.module.util.SysUtil;
+import com.iking.module.user.model.http.HttpInsertUserReq;
+import com.iking.module.user.model.http.HttpSelectUserInfoReq;
 import com.iking.userservice.dao.TUserMapper;
 import com.iking.userservice.service.TUserService;
 import io.swagger.annotations.Api;
@@ -49,7 +49,7 @@ public class UserController {
      * @date 2018年8月10日 上午9:24:00
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    private Msg insert(@RequestBody HttpInsertUserReq tUser, HttpServletRequest request) {
+    private Msg insert(@RequestBody HttpInsertUserReq tUser, HttpServletRequest request) throws NoSuchAlgorithmException{
         Msg msg = new Msg();
         // 新增信息非空验证
         if (tUser == null) {
@@ -98,14 +98,8 @@ public class UserController {
         tUser.setfAccount(tUser.getfAccount().replaceAll(" ",""));
         tUser.setfPassword(tUser.getfPassword().replaceAll(" ",""));
 
-        try {
-            msg = userService.insert(tUser);
-        } catch (NoSuchAlgorithmException e) {
-            msg.setSuccess(false);
-            msg.setMsg("新增账号异常!");
-            log.error("新增账号异常: 异常信息:" + e.getMessage());
-            return msg;
-        }
+        msg = userService.insert(tUser);
+
         log.info("新增账号: 新增信息=" + tUser.toString());
         return msg;
     }
